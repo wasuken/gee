@@ -1,0 +1,27 @@
+@charset "utf-8";
+header{
+	background-color: lightgreen;
+}
+.header-left{
+	margin-top: 10px;
+	margin-left: 30px;
+	display: inline-block;
+}
+.header-center{
+	margin-top: 10px;
+	margin-left: 50px;
+	display: inline-block;
+}
+.header-right{
+	float: right;
+	margin-right: 50px;
+	margin-top: 10px;
+	display: inline-block;
+}
+.header-right-profile{
+	margin-left: 30px;
+	display: inline-block;
+}
+.header-right-logout{
+	display: inline-block;
+}
