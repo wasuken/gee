@@ -14,7 +14,8 @@ class CorpsTableSeeder extends Seeder
         //
         DB::table('corps')->truncate();
         $corps = [
-            ['user_id' => 2]
+            ['user_id' => 3],
+            ['user_id' => 4]
         ];
         foreach($corps as $corp){
             \App\Corp::create($corp);

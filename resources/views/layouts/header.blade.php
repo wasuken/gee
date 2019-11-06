@@ -35,6 +35,9 @@
 		@elseif($corp_if !== null)
 			<a href="/job_seeker">求職者一覧</a>
 		@endif
+		<div class="header-right-scout">
+			<a href="/scout">スカウト一覧</a>
+		</div>
 		<!-- プロファイルページへ飛ばす -->
 		<div class="header-right-profile">{{ $user->name }}</div>
 		<div class="header-right-logout">

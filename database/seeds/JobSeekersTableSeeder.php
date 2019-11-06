@@ -14,7 +14,8 @@ class JobSeekersTableSeeder extends Seeder
         //
         DB::table('job_seekers')->truncate();
         $seekers = [
-            ['user_id' => 1]
+            ['user_id' => 1],
+            ['user_id' => 2]
         ];
         foreach($seekers as $seeker){
             \App\JobSeeker::create($seeker);

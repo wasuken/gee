@@ -21,7 +21,8 @@ class JobApplicationController extends Controller
     public function index()
     {
         $user = Auth::user();
-        check($user->id);
+        self::check($user->id);
+        $job_seeker = JobSeeker::all()->where('user_id', $user->id)->first();
         $apps = JobApplication::all()->where('job_seeker_id', $job_seeker->id);
         return view('job_application/index', ['apps' => $apps, 'user' => $user]);
     }
@@ -29,8 +30,9 @@ class JobApplicationController extends Controller
     {
         $user = Auth::user();
         // seekerではないなら初期ページに戻す。
-        check($user->id);
+        self::check($user->id);
         // すでに存在してるならそのまま飛ばす。
+        $is_seeker = JobSeeker::all()->where('user_id', $user->id)->first();
         $already_app = JobApplication::all()
                ->where('job_offer_id', $request->job_offer_id)
                      ->where('job_seeker_id' , $is_seeker->id)
@@ -49,7 +51,7 @@ class JobApplicationController extends Controller
     public function destroy(Request $request)
     {
         $user = Auth::user();
-        check($user->id);
+        self::check($user->id);
         $app = JobApplication::findOrFail($request->id);
         $app->delete();
 

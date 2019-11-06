@@ -19,3 +19,4 @@ Route::get('/job_application', 'JobApplicationController@index')->middleware('au
 Route::get('/job_application/create', 'JobApplicationController@create')->middleware('auth');
 Route::delete('/job_application', 'JobApplicationController@destroy')->middleware('auth');
 Route::get('/job_seeker', 'JobSeekerController@index')->middleware('auth');
+Route::get('/scout', 'ScoutController@index')->middleware('auth');
