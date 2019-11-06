@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="{{ asset('css/job_application.css') }}">
 </head>
 <body>
-	@include('layouts.header', ['name' => $user->name])
+	@include('layouts.header', ['user' => $user])
 	<div>
 		<h2>応募済み一覧</h2>
 		@foreach($apps as $app)

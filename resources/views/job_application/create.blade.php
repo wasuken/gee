@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="{{ asset('css/header.css') }}">
 </head>
 <body>
-	@include('layouts.header', ['name' => $user->name])
+	@include('layouts.header', ['user' => $user])
 	<div>
 		<h2>{{$app->title}}に応募しますか？</h2>
 		<form action="/job_application" method="POST">

@@ -11,13 +11,17 @@ use Illuminate\Support\Facades\Log;
 class JobApplicationController extends Controller
 {
     //
-    public function index()
+    public function check(string $user_id)
     {
-        $user = Auth::user();
-        $job_seeker = JobSeeker::all()->where('user_id', $user->id)->first();
+        $job_seeker = JobSeeker::all()->where('user_id', $user_id)->first();
         if($job_seeker === null){
             return redirect('/');
         }
+    }
+    public function index()
+    {
+        $user = Auth::user();
+        check($user->id);
         $apps = JobApplication::all()->where('job_seeker_id', $job_seeker->id);
         return view('job_application/index', ['apps' => $apps, 'user' => $user]);
     }
@@ -25,9 +29,7 @@ class JobApplicationController extends Controller
     {
         $user = Auth::user();
         // seekerではないなら初期ページに戻す。
-        $is_seeker = JobSeeker::all()->where('user_id', $user->id)->first();
-        if($is_seeker === null) return redirect('/');
-
+        check($user->id);
         // すでに存在してるならそのまま飛ばす。
         $already_app = JobApplication::all()
                ->where('job_offer_id', $request->job_offer_id)
@@ -46,6 +48,8 @@ class JobApplicationController extends Controller
     }
     public function destroy(Request $request)
     {
+        $user = Auth::user();
+        check($user->id);
         $app = JobApplication::findOrFail($request->id);
         $app->delete();
 

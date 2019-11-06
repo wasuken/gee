@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="{{ asset('css/job_offer.css') }}">
 </head>
 <body>
-	@include('layouts.header', ['name' => $user->name])
+	@include('layouts.header', ['user' => $user])
 	<div class="main-content">
 		@foreach($offers as $offer)
 			<div class="offer">

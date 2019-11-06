@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\JobOffer;
+use \App\JobSeeker;
 use \App\Corp;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -13,8 +14,14 @@ class JobOfferController extends Controller
 {
     public function index(Request $request)
     {
-        $offers = DB::table('job_offers');
         $user = Auth::user();
+        $corp_if = Corp::all()->where('user_id', $user->id)->first();
+        // 企業なら求職者一覧に飛ばす。
+        if($corp_if !== null) return redirect('/job_seeker');
+
+        $job_seeker_if = JobSeeker::all()->where('user_id', $user->id)->first();
+        if($job_seeker_if === null) abort('500', '不整合なユーザです。');
+        $offers = DB::table('job_offers');
         if($request->occupation !== null && $request->occupation !== '') {
             $offers = $offers->where('occupation', 'like', '%' . $request->occupation . '%');
         }
