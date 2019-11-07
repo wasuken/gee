@@ -42,6 +42,14 @@ return [
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
+        'testing' => [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+            'options'  => [
+                PDO::ATTR_PERSISTENT => false,
+            ],
+        ],
 
         'mysql' => [
             'driver' => 'mysql',

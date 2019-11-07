@@ -68,23 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'pr' => $data['pr'],
-        ]);
-        if(intval($data['user-type']) === 0){
-            Log::debug('job seeker');
-            JobSeeker::create([
-               'user_id' => $user->id
-            ]);
-        }else if(intval($data['user-type']) === 1){
-            Log::debug('corp');
-            Corp::create([
-               'user_id' => $user->id
-            ]);
-        }
+        $user = Helper::user_create_etc(intval($data['user-type']),$data);
         return $user;
     }
 }
