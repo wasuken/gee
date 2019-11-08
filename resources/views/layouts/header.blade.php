@@ -33,6 +33,9 @@
 		@if($seeker_if !== null)
 			<a href="/job_application">応募一覧</a>
 		@elseif($corp_if !== null)
+			<div class="header-right-create-offer">
+				<a href="/job_offer/create">求人票作成</a>
+			</div>
 			<a href="/job_seeker">求職者一覧</a>
 		@endif
 		<div class="header-right-scout">

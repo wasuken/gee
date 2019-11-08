@@ -1,5 +1,6 @@
 <?php use \App\User; ?>
 <?php use \App\Corp; ?>
+<?php use \App\JobSeeker; ?>
 <head>
 	<title>Gee</title>
 	<link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -16,11 +17,13 @@
 				<p>勤務地:{{ $offer->work_location }}</p>
 				<p>職種:{{ $offer->occupation }}</p>
 				<p>求人内容:{{ $offer->contents }}</p>
+				@if(JobSeeker::all()->where('user_id', $user->id)->first() !== null)
 				<form action="/job_application" method="POST">
 					@csrf
 					<input name="job_offer_id" type="hidden" value="{{$offer->id}}"/>
 					<input type="submit" value="応募する" />
 				</form>
+				@endif
 			</div>
 		@endforeach
 	</div>
