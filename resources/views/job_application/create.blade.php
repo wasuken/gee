@@ -1,7 +1,7 @@
 <?php use \App\Corp; ?>
 <?php use \App\User; ?>
 <head>
-	<title>Gee</title>
+	<title>{{ config('app.name', 'Gee') }}</title>
 	<link rel="stylesheet" href="{{ asset('css/header.css') }}">
 </head>
 <body>

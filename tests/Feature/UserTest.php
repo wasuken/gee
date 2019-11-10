@@ -13,39 +13,33 @@ use Helper;
 class UserTest extends TestCase
 {
     use RefreshDatabase;
-    private $pwd = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
-    public function testCreateSeederUser()
+    public function testLogin()
     {
-        $user = Helper::user_create_etc(0, [
-            'name' => 'test',
-            'email' => 'test@ttaamail.com',
-            'email_verified_at' => now(),
-            'password' => $this->pwd,
-            'pr' => Str::random(100),
-            'remember_token' => Str::random(10),
+        $pwd = Str::random(10);
+        $user = new User();
+        $user->name = 'aaaaa';
+        $user->email = 'aaaaa@test.com';
+        $user->pr = Str::random(100);
+        $user->password = $pwd;
+        $user->password_confirm = $pwd;
+        $response = $this->post('/register', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'pr' => $user->pr,
+            'password' => $pwd,
+            'password_confirm' => $pwd,
         ]);
-        $response = $this->post('login', [
-            'email'    => $user->email,
-            'password' => $this->pwd,
+
+        $this->assertDatabaseHas('users', [
+            'name' => $user->name,
+            'email' => $user->email,
+            'pr' => $user->pr
+        ]);
+        $response->assertRedirect('/');
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => $user->password
         ]);
         $this->assertTrue(Auth::check());
-        $response->assertRedirect('/');
-    }
-    public function testCreateCorpUser()
-    {
-        $user = Helper::user_create_etc(1, [
-            'name' => 'test',
-            'email' => 'test@ttaamail.com',
-            'email_verified_at' => now(),
-            'password' => $this->pwd,
-            'pr' => Str::random(100),
-            'remember_token' => Str::random(10),
-        ]);
-        $response = $this->post('login', [
-            'email'    => $user->email,
-            'password' => $this->pwd,
-        ]);
-        $this->assertTrue(Auth::check());
-        $response->assertRedirect('/');
     }
 }

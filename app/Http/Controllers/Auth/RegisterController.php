@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\JobSeeker;
 use App\Corp;
+use Helper;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -68,7 +70,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        Log::debug($data);
         $user = Helper::user_create_etc(intval($data['user-type']),$data);
         return $user;
+    }
+    protected function register(Request $request)
+    {
+        Log::debug($request);
+        $user = Helper::user_create_etc(intval($request['user-type']),[
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'password_confirm' => $request->password_confirm,
+            'pr' => $request->pr,
+        ]);
+        return redirect('/');
     }
 }

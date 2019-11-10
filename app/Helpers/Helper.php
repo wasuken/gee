@@ -5,6 +5,7 @@ use App\User;
 use App\JobSeeker;
 use App\Corp;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class Helper
 {

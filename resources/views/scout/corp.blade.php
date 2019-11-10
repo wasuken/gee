@@ -1,7 +1,7 @@
 <?php use \App\User; ?>
 <?php use \App\JobSeeker; ?>
 <head>
-	<title>Gee</title>
+	<title>{{ config('app.name', 'Gee') }}</title>
 	<link rel="stylesheet" href="{{ asset('css/header.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/scout/corp.css') }}">
 </head>

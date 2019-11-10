@@ -1,6 +1,7 @@
 <?php use \App\User; ?>
 <head>
-	<title>Gee</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ config('app.name', 'Gee') }}</title>
 	<link rel="stylesheet" href="{{ asset('css/header.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/job_seeker.css') }}">
 </head>

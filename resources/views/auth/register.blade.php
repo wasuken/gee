@@ -66,6 +66,11 @@
 
                             <div class="col-md-6">
 								<textarea cols="50" id="pr" name="pr" rows="10"></textarea>
+								@error('pr')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 						<div class="form-group row">
@@ -73,6 +78,11 @@
                             <div class="col-md-6">
 								<input type="radio" name="user-type" value="0">個人
 								<input type="radio" name="user-type" value="1" checked>企業
+								@error('user-type')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 

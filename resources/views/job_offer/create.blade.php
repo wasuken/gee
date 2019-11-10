@@ -1,5 +1,5 @@
 <head>
-	<title>Gee</title>
+	<title>{{ config('app.name', 'Gee') }}</title>
 	<link rel="stylesheet" href="{{ asset('css/header.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/job_offer.css') }}">
 </head>
