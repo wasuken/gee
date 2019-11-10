@@ -12,6 +12,10 @@
 			<div class="seeker">
 				<p>名前:{{$seeker_user->name}}</p>
 				<p>PR:{{$seeker_user->pr}}</p>
+				<form action="/scout/create" method="GET">
+					<input name="job_seeker_id" type="hidden" value="{{$seeker_user->id}}"/>
+					<input name="sbm" type="submit" value="スカウト文を送る"/>
+				</form>
 			</div>
 		@endforeach
 	</div>

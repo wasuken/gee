@@ -40,6 +40,12 @@ class ScoutTest extends TestCase
             'password' => $pwd
         ]);
         $this->assertTrue(Auth::check());
-        $this->post('/scout');
+        $contents = Str::random(100);
+        $this->post('/scout', [
+            'job_seeker_id' => JobSeeker::where('user_id', $user_seeker->id)->first()->id,
+            'contents' => $contents,
+        ]);
+        $this->get('/scout')
+            ->assertSee($contents);
     }
 }

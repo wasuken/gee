@@ -25,3 +25,5 @@ Route::delete('/job_application', 'JobApplicationController@destroy')->middlewar
 Route::get('/job_seeker', 'JobSeekerController@index')->middleware('auth');
 
 Route::get('/scout', 'ScoutController@index')->middleware('auth');
+Route::post('/scout', 'ScoutController@store')->middleware('auth');
+Route::get('/scout/create', 'ScoutController@create')->middleware('auth');

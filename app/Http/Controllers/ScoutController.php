@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ScoutController extends Controller
 {
+    public function check(string $user_id)
+    {
+        $corp_if = Corp::all()->where('user_id', $user_id)->first();
+        $seeker_if = JobSeeker::all()->where('user_id', $user_id)->first();
+        if($corp_if === null && $job_seeker_if === null) abort('500', '不整合なユーザです。');
+        if($corp_if === null) return redirect('/');
+    }
     //
     public function index()
     {
@@ -26,5 +33,23 @@ class ScoutController extends Controller
             $view = 'scout/job_seeker';
         }
         return view($view, ['scouts' => $scouts, 'user' => $user]);
+    }
+    public function store(Request $request)
+    {
+        $user = Auth::user();
+        self::check($user->id);
+        $corp = Corp::all()->where('user_id', $user->id)->first();
+        $scout = Scout::create([
+            'job_seeker_id' => $request->job_seeker_id,
+            'corp_id' => $corp->id,
+            'contents' => $request->contents
+        ]);
+        return redirect('/scout');
+    }
+    public function create(Request $request)
+    {
+        $user = Auth::user();
+        self::check($user->id);
+        return view('scout/create', ['user' => $user, 'job_seeker_id' => $request->job_seeker_id]);
     }
 }
