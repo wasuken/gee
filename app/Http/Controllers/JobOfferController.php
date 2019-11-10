@@ -49,6 +49,14 @@ class JobOfferController extends Controller
         $user = Auth::user();
         self::if_corp_redirect($user->id);
 
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:200',
+            'presentation_annual_income' => 'required|integer|between:0,999999999',
+            'work_location' => 'required|string|max:100',
+            'occupation' => 'required|string|max:100',
+            'contents' => 'required|string|max:3000',
+        ]);
+
         $offer = new JobOffer();
         $offer->corp_id = Corp::all()->where('user_id', $user->id)->first()->id;
         $offer->title = $request->title;

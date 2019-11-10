@@ -12,6 +12,9 @@
 		<form action="/scout" method="POST">
 			@csrf
 			<input name="job_seeker_id" type="hidden" value="{{$job_seeker_id}}"/>
+			@error('contents')
+			<div class="alert alert-danger">{{ $message }}</div>
+			@enderror
 			<p>スカウト文:<textarea cols="30" name="contents" rows="30"></textarea></p>
 			<p><input name="sbm" type="submit" value="送信"/></p>
 		</form>

@@ -31,6 +31,11 @@ class JobApplicationController extends Controller
         $user = Auth::user();
         // seekerではないなら初期ページに戻す。
         self::check($user->id);
+
+        $validatedData = $request->validate([
+            'job_offer_id' => 'integer'
+        ]);
+
         // すでに存在してるならそのまま飛ばす。
         $is_seeker = JobSeeker::all()->where('user_id', $user->id)->first();
         $already_app = JobApplication::all()

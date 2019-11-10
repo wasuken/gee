@@ -38,6 +38,11 @@ class ScoutController extends Controller
     {
         $user = Auth::user();
         self::check($user->id);
+
+        $validatedData = $request->validate([
+            'contents' => 'required|string|between:0,3000'
+        ]);
+
         $corp = Corp::all()->where('user_id', $user->id)->first();
         $scout = Scout::create([
             'job_seeker_id' => $request->job_seeker_id,

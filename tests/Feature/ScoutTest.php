@@ -48,4 +48,67 @@ class ScoutTest extends TestCase
         $this->get('/scout')
             ->assertSee($contents);
     }
+    // 求職者から求職者へのスカウト(失敗)
+    public function testCreateScoutFail()
+    {
+        $pwd = Str::random(10);
+        $user_corp = Helper::user_create_etc(1, [
+            'name' => 'corp',
+            'email' => 'corp@ttaamail.com',
+            'email_verified_at' => now(),
+            'password' => $pwd,
+            'pr' => Str::random(100),
+            'remember_token' => Str::random(10),
+        ]);
+        $user_seeker = Helper::user_create_etc(0, [
+            'name' => 'seeker',
+            'email' => 'seeker@ttaamail.com',
+            'email_verified_at' => now(),
+            'password' => $pwd,
+            'pr' => Str::random(100),
+            'remember_token' => Str::random(10),
+        ]);
+        $this->post('/login', [
+            'email' => $user_seeker->email,
+            'password' => $pwd
+        ]);
+        $contents = Str::random(100);
+        $this->post('/scout', [
+            'job_seeker_id' => JobSeeker::where('user_id', $user_seeker->id)->first()->id,
+            'contents' => $contents,
+        ]);
+        $this->get('/scout')
+            ->assertDontSee($contents);
+    }
+    public function testCreateScoutValidationFail()
+    {
+        $pwd = Str::random(10);
+        $user_corp = Helper::user_create_etc(1, [
+            'name' => 'corp',
+            'email' => 'corp@ttaamail.com',
+            'email_verified_at' => now(),
+            'password' => $pwd,
+            'pr' => Str::random(100),
+            'remember_token' => Str::random(10),
+        ]);
+        $user_seeker = Helper::user_create_etc(0, [
+            'name' => 'seeker',
+            'email' => 'seeker@ttaamail.com',
+            'email_verified_at' => now(),
+            'password' => $pwd,
+            'pr' => Str::random(100),
+            'remember_token' => Str::random(10),
+        ]);
+        $this->post('/login', [
+            'email' => $user_corp->email,
+            'password' => $pwd
+        ]);
+        $contents = Str::random(10000);
+        $this->post('/scout', [
+            'job_seeker_id' => JobSeeker::where('user_id', $user_seeker->id)->first()->id,
+            'contents' => $contents,
+        ]);
+        $this->get('/scout')
+            ->assertDontSee($contents);
+    }
 }

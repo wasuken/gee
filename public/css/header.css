@@ -31,3 +31,6 @@ header{
 .header-right-create-offer{
 	display: inline-block;
 }
+.alert-danger{
+	color: red;
+}
