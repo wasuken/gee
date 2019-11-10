@@ -13,32 +13,70 @@ use Helper;
 class UserTest extends TestCase
 {
     use RefreshDatabase;
-    public function testLogin()
+    public function testCreateLoginSeeker()
     {
         $pwd = Str::random(10);
-        $user = new User();
-        $user->name = 'aaaaa';
-        $user->email = 'aaaaa@test.com';
-        $user->pr = Str::random(100);
-        $user->password = $pwd;
-        $user->password_confirm = $pwd;
+        $name = 'aaaaa';
+        $email = 'aaaaa@test.com';
+        $pr = Str::random(100);
+        $password = $pwd;
         $response = $this->post('/register', [
-            'name' => $user->name,
-            'email' => $user->email,
-            'pr' => $user->pr,
+            'name' => $name,
+            'email' => $email,
+            'pr' => $pr,
             'password' => $pwd,
             'password_confirm' => $pwd,
+            'user_type' => '0'
         ]);
 
         $this->assertDatabaseHas('users', [
-            'name' => $user->name,
-            'email' => $user->email,
-            'pr' => $user->pr
+            'name' => $name,
+            'email' => $email,
+            'pr' => $pr
         ]);
         $response->assertRedirect('/');
         $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => $user->password
+            'email' => $email,
+            'password' => $password
+        ]);
+        $user = User::all()->where('email', $email)->first();
+        $this->assertDatabaseHas('job_seekers', [
+            'user_id' => $user->id
+        ]);
+        $this->assertTrue(Auth::check());
+    }
+    public function testCreateLoginCorp()
+    {
+        $pwd = Str::random(10);
+        $name = 'aaaaa';
+        $email = 'aaaaa@test.com';
+        $pr = Str::random(100);
+        $password = $pwd;
+        $response = $this->post('/register', [
+            'name' => $name,
+            'email' => $email,
+            'pr' => $pr,
+            'password' => $pwd,
+            'password_confirm' => $pwd,
+            'user_type' => '1',
+        ]);
+        $this->assertDatabaseHas('users', [
+            'name' => $name,
+            'email' => $email,
+            'pr' => $pr
+        ]);
+        $user = User::where('email', $email)->first();
+        $this->assertDatabaseHas('corps', [
+            'user_id' => $user->id
+        ]);
+        $response->assertRedirect('/');
+        $response = $this->post('/login', [
+            'email' => $email,
+            'password' => $password
+        ]);
+        $user = User::all()->where('email', $email)->first();
+        $this->assertDatabaseHas('corps', [
+            'user_id' => $user->id
         ]);
         $this->assertTrue(Auth::check());
     }

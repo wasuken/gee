@@ -77,7 +77,10 @@ class RegisterController extends Controller
     protected function register(Request $request)
     {
         Log::debug($request);
-        $user = Helper::user_create_etc(intval($request['user-type']),[
+        // NULLなら0(求職者)にする。
+        $user_type = is_null($request->user_type)? 0 : intval($request->user_type);
+        Log::debug($user_type);
+        $user = Helper::user_create_etc($user_type, [
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,

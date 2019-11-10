@@ -6,6 +6,7 @@ use App\JobSeeker;
 use App\Corp;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class Helper
 {
