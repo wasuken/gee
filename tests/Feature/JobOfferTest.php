@@ -47,7 +47,7 @@ class JobOfferTest extends TestCase
         $this->get('/job_offer')
             ->assertSee($title)
             ->assertSee($occupation)
-            ->assertSee($presentation_annual_income)
+            ->assertSee(number_format($presentation_annual_income))
             ->assertSee($work_location)
             ->assertSee($contents);
         $this->assertDatabaseHas('job_offers', [

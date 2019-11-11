@@ -21,6 +21,7 @@ body{
 	background-color: #FFFFCC;
 }
 .common-detail{
+	width: 70%;
 	margin-top: 10px;
 	box-shadow: 2px 2px 4px gray;
 	background-color: #CCFF99;
@@ -32,4 +33,23 @@ body{
     background-color: snow;
     font-size: 1em;
     line-height: 1.2;
+}
+.common-table{
+	border-spacing: 0;
+}
+
+.common-table th{
+	width:200px;
+	border-bottom: solid 2px green;
+	background-color: limegreen;
+	padding: 10px 0;
+}
+
+.common-table td{
+	width:800px;
+	word-break: break-all;
+	border-bottom: solid 2px green ;
+	border-right: solid 2px green ;
+	margin-left: 10px;
+	padding: 10px 0;
 }

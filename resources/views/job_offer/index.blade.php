@@ -12,12 +12,34 @@
 	<div>
 		@foreach($offers as $offer)
 			<div class="common-detail">
-				<h3>会社名:{{ User::find(Corp::find($offer->corp_id)->user_id)->name }}</h3>
-				<p>求人タイトル:{{$offer->title}}</p>
-				<p>年収:{{ $offer->presentation_annual_income }}</p>
-				<p>勤務地:{{ $offer->work_location }}</p>
-				<p>職種:{{ $offer->occupation }}</p>
-				<p>求人内容:{{ $offer->contents }}</p>
+				<table class="common-table">
+					<tbody>
+						<tr>
+							<th>会社名</th>
+							<td>{{ User::find(Corp::find($offer->corp_id)->user_id)->name }}</td>
+						</tr>
+						<tr>
+							<th>求人タイトル</th>
+							<td>{{ $offer->title }}</td>
+						</tr>
+						<tr>
+							<th>年収</th>
+							<td>{{ number_format($offer->presentation_annual_income) }}円</td>
+						</tr>
+						<tr>
+							<th>勤務地</th>
+							<td>{{ $offer->work_location }}</td>
+						</tr>
+						<tr>
+							<th>職種</th>
+							<td>{{ $offer->occupation }}</td>
+						</tr>
+						<tr>
+							<th>求人内容</th>
+							<td>{{ $offer->contents }}</td>
+						</tr>
+					</tbody>
+				</table>
 				@if(JobSeeker::all()->where('user_id', $user->id)->first() !== null)
 					<form action="/job_application" method="POST">
 						@csrf
