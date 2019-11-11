@@ -1,0 +1,35 @@
+@charset "utf-8";
+.radius-submit{
+	cursor: pointer;
+	font-family: FontAwesome;
+	border: none;
+	background: lightgreen;
+	color: #fff;
+	width: 80px;
+	height: 35px;
+	outline : none;
+	border: 2px solid white;
+	transition: .4s;
+	border-radius: 0.67em;
+}
+.radius-submit:hover{
+	color: lightgreen;
+	background: white;
+	border: 2px solid green;
+}
+body{
+	background-color: #FFFFCC;
+}
+.common-detail{
+	margin-top: 10px;
+	box-shadow: 2px 2px 4px gray;
+	background-color: #CCFF99;
+}
+.common-input-text{
+	border: 2px solid #0a0;
+    border-radius: 0.67em;
+    padding: 0.5em;
+    background-color: snow;
+    font-size: 1em;
+    line-height: 1.2;
+}

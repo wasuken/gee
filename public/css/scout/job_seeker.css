@@ -3,3 +3,11 @@
 	margin-top: 10px;
 	box-shadow: 2px 2px 4px gray;
 }
+.scout-create-contents{
+	border: 2px solid #0a0;
+    border-radius: 0.67em;
+    padding: 0.5em;
+    background-color: snow;
+    font-size: 1em;
+    line-height: 1.2;
+}

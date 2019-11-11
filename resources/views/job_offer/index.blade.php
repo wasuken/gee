@@ -5,12 +5,13 @@
 	<title>{{ config('app.name', 'Gee') }}</title>
 	<link rel="stylesheet" href="{{ asset('css/header.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/job_offer.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/common.css') }}">
 </head>
 <body>
 	@include('layouts.header', ['user' => $user])
-	<div class="main-content">
+	<div>
 		@foreach($offers as $offer)
-			<div class="offer">
+			<div class="common-detail">
 				<h3>会社名:{{ User::find(Corp::find($offer->corp_id)->user_id)->name }}</h3>
 				<p>求人タイトル:{{$offer->title}}</p>
 				<p>年収:{{ $offer->presentation_annual_income }}</p>
@@ -21,7 +22,7 @@
 					<form action="/job_application" method="POST">
 						@csrf
 						<input name="job_offer_id" type="hidden" value="{{$offer->id}}"/>
-					<input type="submit" value="応募する" />
+						<input class="radius-submit" type="submit" value="応募する" />
 				</form>
 				@endif
 			</div>
