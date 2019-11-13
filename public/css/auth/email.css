@@ -1,0 +1,17 @@
+@charset "utf-8";
+.email-reset-form{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	-webkit- transform: translateY(-50%) translateX(-50%);
+}
+.email-reset-form-window{
+	width: 100%;
+	text-align: center;
+	border: 2px solid #0a0;
+    border-radius: 0.67em;
+    padding: 0.5em;
+    background-color: snow;
+    font-size: 1em;
+}

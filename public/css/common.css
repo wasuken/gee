@@ -17,6 +17,23 @@
 	background: white;
 	border: 2px solid green;
 }
+.radius-submit-var-width{
+	cursor: pointer;
+	font-family: FontAwesome;
+	border: none;
+	background: lightgreen;
+	color: #fff;
+	height: 35px;
+	outline : none;
+	border: 2px solid white;
+	transition: .4s;
+	border-radius: 0.67em;
+}
+.radius-submit-var-width:hover{
+	color: lightgreen;
+	background: white;
+	border: 2px solid green;
+}
 body{
 	background-color: #FFFFCC;
 }
